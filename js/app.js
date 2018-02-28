@@ -1,6 +1,27 @@
 /*
  * Create a list that holds all of your cards
+ * Use Array.from method in order to transform an HTML collection in an Array. Only works in ES6.
  */
+//const listCards = Array.from(document.querySelectorAll(".card "));
+
+const listCards = [
+  "fa fa-diamond",
+  "fa fa-paper-plane-o",
+  "fa fa-anchor",
+  "fa fa-bolt", 
+  "fa fa-cube",
+  "fa fa-anchor",
+  "fa fa fa-leaf",
+  "fa fa-bicycle",
+  "fa fa-diamond",
+  "fa fa-bomb",
+  "fa fa-leaf",
+  "fa fa-bomb",
+  "fa fa-bolt",
+  "fa fa-bicycle",
+  "fa fa-paper-plane-o",
+  "fa fa-cube"
+];
 
 
 /*
@@ -24,6 +45,21 @@ function shuffle(array) {
 
     return array;
 }
+
+//shuffle the list of cards
+shuffle(listCards);
+
+
+listCards.forEach(function(cardItem) {
+	const container = document.getElementById("deck");     // set #deck as a container
+	const list = document.createElement("li");             // Create a <li> node
+	const listItem = document.createElement("i");          // create a <i> node
+	list.appendChild(listItem);
+	container.appendChild(list);
+	list.setAttribute('class', 'card');                    // set a class to <li>
+	listItem.setAttribute('class', cardItem);              // set a class to <i>	
+})
+
 
 
 /*
