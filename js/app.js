@@ -11,7 +11,7 @@ const listCards = [
   "fa fa-bolt", 
   "fa fa-cube",
   "fa fa-anchor",
-  "fa fa fa-leaf",
+  "fa fa-leaf",
   "fa fa-bicycle",
   "fa fa-diamond",
   "fa fa-bomb",
@@ -50,15 +50,80 @@ function shuffle(array) {
 shuffle(listCards);
 
 
-listCards.forEach(function(cardItem) {
-	const container = document.getElementById("deck");     // set #deck as a container
+const UlContainer = document.getElementById("deck"); // set #deck as a container
+
+//Insert the sorted itens into HTML
+listCards.forEach(function(cardItem) {	    
 	const list = document.createElement("li");             // Create a <li> node
 	const listItem = document.createElement("i");          // create a <i> node
 	list.appendChild(listItem);
-	container.appendChild(list);
-	list.setAttribute('class', 'card');                    // set a class to <li>
+	UlContainer.appendChild(list);
+	list.setAttribute('class', 'card show');                    // set a class to <li>
 	listItem.setAttribute('class', cardItem);              // set a class to <i>	
 })
+
+
+// Set the time for memorize cards
+setTimeout(function() {		
+	const allCards = document.getElementsByClassName('card');	
+	for (var i = 0; i < allCards.length; i++) {
+		allCards[i].setAttribute('class', 'card'); 
+	}	
+}, 5000);		
+
+
+
+
+const openCards = [];
+
+
+function start(event) {
+	event.target.classList.toggle('show');
+	openCards.push(event.target.firstChild.className);
+	console.log(openCards);
+	if (openCards.length > 1) {			
+		let leng = openCards.length -1;		
+			if(openCards[leng] === openCards[leng - 1]) {
+				console.log('match');	
+				console.log(openCards);	
+				// Change Class for the event target item			
+				event.target.classList.remove('show');
+				event.target.classList.add('match');
+				openCards.splice(0, openCards.length);
+				//Change classes for the first item clicked
+				const cardShow = document.querySelector('.card.show');				
+				cardShow.classList.remove('show');
+				cardShow.classList.add('match');
+			} else {
+				//empty array
+				openCards.splice(0, openCards.length);
+				// Change Class for the event target item to wrong
+				event.target.setAttribute('class', 'card wrong');
+				// Change Class for the open card item to wrong	
+				const cardShow = document.querySelector('.card.show');
+				cardShow.setAttribute('class', 'card wrong');
+				// Hide cards after time			
+				setTimeout(function() {
+					event.target.classList.toggle('wrong');	
+					cardShow.classList.toggle('wrong');	
+				 }, 1000);				
+				console.log(' doesnt match');
+				console.log(openCards);
+											
+			}
+	}
+	
+	
+}
+
+UlContainer.addEventListener("click", start);
+
+
+
+
+
+
+
 
 
 
