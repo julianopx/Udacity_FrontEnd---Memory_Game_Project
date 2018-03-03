@@ -63,7 +63,7 @@ listCards.forEach(function(cardItem) {
 })
 
 
-// Set the time for memorize cards
+// Set the time for memorize cards - hide cards after "X" time
 setTimeout(function() {		
 	const allCards = document.getElementsByClassName('card');	
 	for (var i = 0; i < allCards.length; i++) {
@@ -74,18 +74,20 @@ setTimeout(function() {
 
 
 
-const openCards = [];
-
+let openCards = [];
+let moves = 0;
+let matches = document.querySelectorAll(".card match").length;
+console.log(matches);
 
 function start(event) {
-	event.target.classList.toggle('show');
-	openCards.push(event.target.firstChild.className);
-	console.log(openCards);
+	event.target.classList.toggle('show');	
+	pushArr();
+	//console.log(openCards);	
 	if (openCards.length > 1) {			
 		let leng = openCards.length -1;		
 			if(openCards[leng] === openCards[leng - 1]) {
 				console.log('match');	
-				console.log(openCards);	
+				//console.log(openCards);	
 				// Change Class for the event target item			
 				event.target.classList.remove('show');
 				event.target.classList.add('match');
@@ -94,6 +96,10 @@ function start(event) {
 				const cardShow = document.querySelector('.card.show');				
 				cardShow.classList.remove('show');
 				cardShow.classList.add('match');
+				//APPLY MOVES and MATCHES				
+				moves++;
+				matches++;
+				allMatches();
 			} else {
 				//empty array
 				openCards.splice(0, openCards.length);
@@ -106,23 +112,50 @@ function start(event) {
 				setTimeout(function() {
 					event.target.classList.toggle('wrong');	
 					cardShow.classList.toggle('wrong');	
-				 }, 1000);				
+				 }, 800);				
 				console.log(' doesnt match');
 				console.log(openCards);
-											
+				//APPLY MOVES
+				moves++;											
 			}
-	}
-	
-	
+		countMoves();
+		rating();
+		//console.log(matches);
+
+	}	
 }
 
+// EVENT LISTENER
 UlContainer.addEventListener("click", start);
 
+function pushArr() {
+	let elClass = event.target.firstChild.className;
+	if(elClass) {
+		openCards.push(event.target.firstChild.className);
+	}
+}
 
 
+function countMoves() {
+	const insertMoves = document.querySelector('.moves');
+	insertMoves.innerHTML = moves;
+}
 
+function allMatches() {
+	const pairs = listCards.length / 2;
+	if(matches === pairs) {
+		console.log(alert('CONGRATS!! You completed this game with just ' + moves + ' moves'));
+	}
+}
 
-
+function rating() {
+	const lastStar = document.querySelector('.stars li:last-child')	
+	if(moves === 13) {
+		lastStar.remove();
+	} else if(moves === 18) {
+		lastStar.remove();
+	} 
+}
 
 
 
