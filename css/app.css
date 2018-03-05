@@ -68,15 +68,19 @@ h1 {
 .deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
-    cursor: default;
+    cursor: default;    
 }
 
-.deck .card.show {
+.deck .card.show {    
     font-size: 33px;
 }
 
+.deck .card.show.block {
+    pointer-events: none;
+}
+
 .deck .card.match {
-    cursor: default;
+    pointer-events: none;
     background: #02ccba;
     font-size: 33px;
 }
@@ -117,3 +121,70 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.score-panel .timer {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+/*
+ * Styles for MOdal Fianl Message
+ */
+
+ .modal-message {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+
+ }
+
+ .modal-message .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;    
+    min-height: 20%;
+ }
+
+  .modal-message .close-button {
+        float: right;
+        width: 1.5rem;
+        line-height: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: lightgray;
+    }
+
+    .modal-message .close-button:hover {
+        background-color: darkgray;
+    }
+
+    .modal-message.show-modal {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1.0);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    }
+
+    .modal-message h1 {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .modal-message .congrats {
+        font-size: 16px;
+        font-weigth: bold;
+        color: #069608;
+    }
