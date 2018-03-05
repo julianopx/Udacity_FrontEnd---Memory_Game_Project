@@ -149,7 +149,14 @@ function rating() {
 
 //RELOAD BUTTON
 const resetButton = document.querySelector('.restart');
-resetButton.addEventListener('click', function(){window.location.reload(true);});
+resetButton.addEventListener('click', resetGame);
+
+function resetGame() {
+	if(modal.classList.contains('show-modal')) {
+		toggleModal();
+	}
+	window.location.reload(true);	
+}
 
 //SET TIMER
 let sec = 0;
@@ -194,9 +201,8 @@ function windowOnClick(event) {
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
-
-
-
+const playAgain = document.querySelector('.play-again');
+playAgain.addEventListener('click', resetGame);
 
 
 /*
