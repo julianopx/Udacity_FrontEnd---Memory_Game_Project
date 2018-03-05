@@ -73,6 +73,7 @@ h1 {
 
 .deck .card.show {    
     font-size: 33px;
+    pointer-events: none;
 }
 
 .deck .card.show.block {
@@ -92,6 +93,7 @@ h1 {
     font-size: 33px;
     color: black;
     background: #ffa0a9;
+    pointer-events: none;
 }
 
 /*
@@ -198,5 +200,5 @@ h1 {
     }
 
     .modal-message .play-again:hover {
-        background: #0a042b;
+        background: #0a042b';
     }

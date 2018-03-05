@@ -138,7 +138,11 @@ function allMatches() {
 	}
 }
 
-function rating() {
+// Star Rating
+const starsList = document.querySelector('.stars');
+const starsNum  = starsList.children.length;
+
+function rating() {	
 	const lastStar = document.querySelector('.stars li:last-child');
 	if(moves === 13) {
 		lastStar.remove();
@@ -179,7 +183,7 @@ function chronometer() {
 		}
 	}
 }
-chronometer();
+setTimeout("chronometer()", 5000);
 
 //MODAL FINAL MESSAGE
 const modal = document.querySelector(".modal-message");
@@ -189,7 +193,7 @@ const modalMessage = document.querySelector(".modal-message .content h1");
 
 function toggleModal() {
 	modal.classList.toggle('show-modal');
-	modalMessage.innerHTML = "<span class = 'congrats'>CONGRATS!</span> </br> You needed " + moves + " moves to finish this game </br> and it took " + min + "m and " + sec + "s. " ;
+	modalMessage.innerHTML = "<span class = 'congrats'>CONGRATS!</span> </br> You needed " + moves + " moves to finish this game </br> and it took " + min + "m and " + sec + "s. So you got a " + starsNum + " stars score." ;
 }
 
 function windowOnClick(event) {
