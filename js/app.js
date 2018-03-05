@@ -139,17 +139,18 @@ function allMatches() {
 }
 
 // Star Rating
-const starsList = document.querySelector('.stars');
-const starsNum  = starsList.children.length;
-
 function rating() {	
 	const lastStar = document.querySelector('.stars li:last-child');
 	if(moves === 13) {
 		lastStar.remove();
 	} else if(moves === 18) {
 		lastStar.remove();
-	} 
+	}
+	const starsList = document.querySelector('.stars');
+	let starsNum  = starsList.children.length;
+	return starsNum;
 }
+
 
 //RELOAD BUTTON
 const resetButton = document.querySelector('.restart');
@@ -189,11 +190,14 @@ setTimeout("chronometer()", 5000);
 const modal = document.querySelector(".modal-message");
 const closeButton = document.querySelector(".close-button");
 const modalMessage = document.querySelector(".modal-message .content h1");
+//const starsList = document.querySelector('.stars');
+//let starsNum  = starsList.children.length;
 
 
 function toggleModal() {
+	const refreshNum = rating();
 	modal.classList.toggle('show-modal');
-	modalMessage.innerHTML = "<span class = 'congrats'>CONGRATS!</span> </br> You needed " + moves + " moves to finish this game </br> and it took " + min + "m and " + sec + "s. So you got a " + starsNum + " stars score." ;
+	modalMessage.innerHTML = "<span class = 'congrats'>CONGRATS!</span> </br> You needed " + moves + " moves to finish this game </br> and it took " + min + "m and " + sec + "s. So you got a " + refreshNum + " star(s) score." ;
 }
 
 function windowOnClick(event) {
@@ -207,6 +211,8 @@ window.addEventListener("click", windowOnClick);
 
 const playAgain = document.querySelector('.play-again');
 playAgain.addEventListener('click', resetGame);
+
+
 
 
 /*
